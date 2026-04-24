@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QRコード｜Gemini Canvas セミナー</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf3 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+  }
+  .card {
+    background: white;
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 540px;
+    width: 100%;
+  }
+  .title-band {
+    background: linear-gradient(135deg, #4285F4 0%, #9b72cb 50%, #d96570 100%);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 1.6em;
+    color: #1a365d;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: #718096;
+    margin-bottom: 32px;
+    font-size: 0.95em;
+  }
+  .qr-frame {
+    background: white;
+    padding: 20px;
+    border: 4px solid #4285F4;
+    border-radius: 16px;
+    display: inline-block;
+    margin: 10px 0 24px;
+  }
+  .qr-frame img {
+    display: block;
+    width: 300px;
+    height: 300px;
+  }
+  .instruction {
+    background: #f0f9ff;
+    border-left: 4px solid #0ea5e9;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-align: left;
+    margin: 20px 0;
+    font-size: 0.95em;
+    color: #075985;
+  }
+  .url-box {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.85em;
+    word-break: break-all;
+    margin-top: 16px;
+  }
+  .print-btn {
+    margin-top: 24px;
+    background: #4285F4;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: #3367d6; transform: translateY(-2px); }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .card { box-shadow: none; padding: 20px; }
+    .print-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="title-band">🎨 Gemini Canvas 体験セミナー</div>
+  <h1>リソース集はこちら</h1>
+  <p class="subtitle">スマホでQRコードを読み取ってください</p>
+
+  <div class="qr-frame">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=0&data=https%3A%2F%2Fhattori-heartmain.github.io%2Fcanvas-seminar%2F" alt="QRコード">
+  </div>
+
+  <div class="instruction">
+    📱 <strong>読み取り方法</strong><br>
+    ① スマホのカメラを起動<br>
+    ② QRコードに向ける<br>
+    ③ 表示されたリンクをタップ
+  </div>
+
+  <div class="url-box">
+    https://hattori-heartmain.github.io/canvas-seminar/
+  </div>
+
+  <button class="print-btn" onclick="window.print()">🖨️ このページを印刷</button>
+</div>
+</body>
+</html>
