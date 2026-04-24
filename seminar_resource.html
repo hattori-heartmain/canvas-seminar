@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Canvas セミナー リソース集</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf3 100%);
+    color: #2c3e50;
+    line-height: 1.8;
+    padding: 40px 20px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  header {
+    background: linear-gradient(135deg, #4285F4 0%, #9b72cb 50%, #d96570 100%);
+    color: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(66, 133, 244, 0.2);
+    margin-bottom: 40px;
+  }
+  header h1 { font-size: 2.2em; margin-bottom: 12px; letter-spacing: 1px; }
+  header .subtitle { font-size: 1.1em; opacity: 0.95; }
+  header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-top: 16px;
+  }
+
+  section {
+    background: white;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+
+  h2 {
+    font-size: 1.5em;
+    color: #1a365d;
+    border-left: 6px solid #4285F4;
+    padding-left: 16px;
+    margin-bottom: 24px;
+  }
+  h3 {
+    font-size: 1.2em;
+    color: #2c5282;
+    margin: 20px 0 12px;
+  }
+
+  .timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  .timetable th, .timetable td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .timetable th {
+    background: #f7fafc;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .timetable tr:hover { background: #f8fafc; }
+  .time-cell {
+    font-weight: bold;
+    color: #4285F4;
+    white-space: nowrap;
+  }
+
+  .demo-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+    transition: all 0.3s;
+  }
+  .demo-card:hover {
+    border-color: #4285F4;
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.1);
+  }
+  .demo-card.demo1 { border-left: 8px solid #ec4899; }
+  .demo-card.demo2 { border-left: 8px solid #3b82f6; }
+
+  .demo-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #1a365d;
+  }
+  .demo-purpose {
+    background: #fef3c7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    margin: 12px 0;
+    color: #78350f;
+  }
+
+  .prompt-box {
+    position: relative;
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 24px 28px;
+    border-radius: 10px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.92em;
+    line-height: 1.7;
+    margin: 16px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #4285F4;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: #3367d6; transform: translateY(-1px); }
+  .copy-btn.copied { background: #10b981; }
+
+  .sample-box {
+    background: #f0f9ff;
+    border-left: 4px solid #0ea5e9;
+    padding: 18px 22px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    margin: 14px 0;
+    white-space: pre-wrap;
+  }
+
+  .tip-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .tip-box h4 {
+    color: #92400e;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+  }
+  .tip-box ul { padding-left: 22px; }
+  .tip-box li { margin: 6px 0; color: #78350f; }
+
+  .steps {
+    counter-reset: step;
+    padding-left: 0;
+    list-style: none;
+  }
+  .steps li {
+    counter-increment: step;
+    padding: 12px 16px 12px 56px;
+    margin: 10px 0;
+    background: #f8fafc;
+    border-radius: 8px;
+    position: relative;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: #4285F4;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .improve-prompt {
+    background: #ecfdf5;
+    border: 2px dashed #10b981;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin: 14px 0;
+  }
+  .improve-prompt strong { color: #065f46; }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #718096;
+    font-size: 0.9em;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 10px; }
+    section { padding: 24px 20px; }
+    header { padding: 30px 20px; }
+    header h1 { font-size: 1.6em; }
+    .prompt-box { font-size: 0.85em; padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🎨 Gemini Canvas 体験セミナー</h1>
+  <p class="subtitle">～プロンプト一つで、あなたも開発者に～</p>
+  <div class="badge">所要時間 30分｜AI初心者向け</div>
+</header>
+
+<section>
+  <h2>📅 タイムテーブル</h2>
+  <table class="timetable">
+    <thead>
+      <tr><th>時間</th><th>内容</th><th>ポイント</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="time-cell">0-5分</td>
+        <td>Canvas紹介・画面の見方</td>
+        <td>まず雰囲気を掴む</td>
+      </tr>
+      <tr>
+        <td class="time-cell">5-17分</td>
+        <td>デモ① 名前占いアプリ</td>
+        <td>見た目のインパクト</td>
+      </tr>
+      <tr>
+        <td class="time-cell">17-28分</td>
+        <td>デモ② 商談メモ整理アプリ</td>
+        <td>実用のインパクト</td>
+      </tr>
+      <tr>
+        <td class="time-cell">28-30分</td>
+        <td>まとめ・自分でも触ってみよう</td>
+        <td>持ち帰り</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>💡 Gemini Canvas とは？</h2>
+  <p>Google の AI「Gemini」に搭載された機能で、<strong>プロンプト（指示文）を入力するだけで、実際に動くアプリやWebページをその場で作ってくれる</strong>ツールです。</p>
+  <h3>こんなことができます</h3>
+  <ul style="padding-left: 24px; margin-top: 10px;">
+    <li>HTMLアプリを一瞬で生成</li>
+    <li>プレビュー画面でその場で動作確認</li>
+    <li>追加プロンプトで即修正</li>
+    <li>コードを読めなくてもOK</li>
+  </ul>
+
+  <div class="tip-box">
+    <h4>🚀 使い方の流れ</h4>
+    <ol style="padding-left: 24px;">
+      <li>Gemini (gemini.google.com) にアクセス</li>
+      <li>「Canvas」モードをオンにする</li>
+      <li>プロンプトを貼り付け → 送信</li>
+      <li>右側のプレビューで動作確認</li>
+      <li>気に入らなければ「○○して」と追加指示</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>💥 デモ① 名前占いアプリ</h2>
+
+  <div class="demo-card demo1">
+    <div class="demo-title">🔮 インパクト重視：見た目で驚かせる</div>
+    <div class="demo-purpose">
+      <strong>狙い：</strong>参加者の名前をその場で入れて試せる。「こんなの作れるの!?」の瞬間を全員で共有。
+    </div>
+
+    <h3>📋 配布プロンプト</h3>
+    <div class="prompt-box" id="prompt1"><button class="copy-btn" onclick="copyPrompt('prompt1', this)">📋 コピー</button>自分の名前を入力すると、その人の「今日の運勢」を
+診断してくれるアプリを作ってください。
+
+・名前を入れてボタンを押すと、総合運・金運・恋愛運・仕事運が
+  ★5段階で表示される
+・今日のラッキーカラー、ラッキーアイテムも表示
+・結果はドラマチックな演出で、キラキラしたアニメーション付き
+・神秘的で占い師っぽい紫と金のデザイン</div>
+
+    <div class="improve-prompt">
+      <strong>✨ 追加で魅せる一言プロンプト例：</strong><br>
+      「もっとポップで可愛い感じにしてください」<br>
+      「結果をTwitterでシェアできるボタンを追加してください」
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>💼 デモ② 商談メモ整理アプリ</h2>
+
+  <div class="demo-card demo2">
+    <div class="demo-title">📊 実用重視：明日から仕事で使える</div>
+    <div class="demo-purpose">
+      <strong>狙い：</strong>ぐちゃぐちゃな商談メモが、一瞬で整理された営業カルテに変わる瞬間を見せる。
+    </div>
+
+    <h3>📋 配布プロンプト</h3>
+    <div class="prompt-box" id="prompt2"><button class="copy-btn" onclick="copyPrompt('prompt2', this)">📋 コピー</button>営業担当者が商談後にメモを整理するためのWebアプリを作ってください。
+
+【入力】
+・顧客名、会社名、商談日を入力する欄
+・商談中に取ったメモ（長文・箇条書き混在OK）を貼り付ける大きなテキストエリア
+
+【AI整理ボタンを押すと、以下を自動抽出・表示】
+① 商談サマリー（3行）
+② 顧客の課題・ニーズ
+③ 顧客が興味を示したポイント
+④ 懸念点・ネガティブ反応
+⑤ 次のアクション（ToDo・期限付き）
+⑥ 次回提案すべき内容のヒント
+⑦ 温度感（ホット/ウォーム/コールド）を判定
+
+【デザイン】
+・ビジネス向けで清潔感のある配色（ネイビー＆白）
+・結果はカード型で見やすく
+・全文コピーボタンと、CRMに貼り付けやすい形式での
+  「テキスト出力ボタン」も付けてほしい</div>
+
+    <h3>📝 デモ用サンプルメモ（これを貼り付けて実演）</h3>
+    <div class="sample-box" id="sample1">4/24 株式会社〇〇 山田部長と面談。
+最初雑談、ゴルフの話で盛り上がる。
+現状、請求書処理に月40時間かかっていて困っているとのこと。
+特に経理の佐藤さんが残業続きで離職リスクあり。
+予算は年間100万以内なら動けそう。
+ただし今期は既に予算消化済みで、来期4月からの導入を検討したい。
+競合のA社からも提案受けているとのこと。
+価格よりサポート体制を重視したいと明言。
+次回：5/15に役員向けプレゼン実施予定。
+資料は連休明けに送付依頼された。</div>
+    <button class="copy-btn" style="position: static; margin-top: 8px;" onclick="copyText('sample1', this)">📋 サンプルメモをコピー</button>
+
+    <div class="improve-prompt">
+      <strong>✨ 追加で魅せる一言プロンプト例：</strong><br>
+      「この商談内容をもとに、お礼メールの下書きも生成する機能を追加してください」<br>
+      → ボタン1つでメール文面まで自動生成 → <strong>「明日から使いたい…！」が出る瞬間</strong>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🎤 講師向け・デモを成功させるコツ</h2>
+  <ol class="steps">
+    <li><strong>事前に必ず1回試しておく</strong> — 本番で動くプロンプトを確定させる</li>
+    <li><strong>作る過程をそのまま見せる</strong> — Canvasが書いていく様子が一番の感動ポイント</li>
+    <li><strong>完成直後に追加プロンプトで改造</strong> — 二度目の感動を演出</li>
+    <li><strong>「このプロンプトで皆さんも同じものが作れます」</strong> — 持ち帰り価値を明示</li>
+    <li><strong>うまくいかない時の復旧プロンプトを用意</strong> — 「エラーが出たので修正してください」</li>
+  </ol>
+</section>
+
+<section>
+  <h2>🎁 参加者へのメッセージ</h2>
+  <div class="tip-box">
+    <h4>💪 今日からあなたもできる3つのこと</h4>
+    <ul>
+      <li>✅ Gemini にアクセスして Canvas モードをオンにする</li>
+      <li>✅ 今日のプロンプトをコピーして自分で試してみる</li>
+      <li>✅ 自分の仕事に合わせて一行変えてみる</li>
+    </ul>
+  </div>
+  <p style="margin-top: 20px; text-align: center; font-size: 1.1em; color: #4285F4; font-weight: bold;">
+    🌟 プロンプトは「お願いの仕方」。丁寧に、具体的に伝えるだけ。 🌟
+  </p>
+</section>
+
+<footer>
+  <p>Gemini Canvas 体験セミナー リソース集</p>
+  <p>© 2026 Heart Main</p>
+</footer>
+
+</div>
+
+<script>
+function copyPrompt(id, btn) {
+  const el = document.getElementById(id);
+  const text = el.innerText.replace(/^📋 コピー\s*/, '');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ コピー完了!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 コピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+function copyText(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ コピー完了!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 サンプルメモをコピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
